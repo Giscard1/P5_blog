@@ -1,0 +1,23 @@
+{
+    "name": "giscard/blog",
+    "description": "Blog",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "giscard",
+            "email": "giscarddesousajunior@hotmail.fr"
+        }
+    ],
+    "require": {
+        "psr/http-message": "^1.0",
+        "guzzlehttp/guzzle": "^7.3",
+        "symfony/routing": "^5.2",
+        "twig/twig": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

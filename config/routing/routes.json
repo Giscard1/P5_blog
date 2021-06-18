@@ -1,0 +1,29 @@
+[
+  {
+    "name": "homepage",
+    "path":"/",
+    "_controller":"App\\Controllers\\DefaultController",
+    "_method": "homepage",
+    "_methods":["GET"]
+  },
+  {
+    "name": "connexion",
+    "path":"/se-connecter",
+    "_controller":"App\\Controllers\\SecurityController",
+    "_method": "login",
+    "_methods":["GET","POST"]
+  },
+  {
+    "name": "edit_student",
+    "path":"/students/{id}/edit",
+    "_controller":"App\\Controllers\\StudentController",
+    "_method": "edit",
+    "_methods":["GET","POST"]
+  },
+  {
+    "name": "inscription",
+    "path":"/inscription",
+    "_controller": "App\\Controllers\\DefaultController",
+    "_method":["GET", "POST"]
+  }
+]
