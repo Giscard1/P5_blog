@@ -1,10 +1,10 @@
 [
   {
     "name": "homepage",
-    "path":"/",
+    "path":"/homepage",
     "_controller":"App\\Controllers\\DefaultController",
     "_method": "homepage",
-    "_methods":["GET"]
+    "_methods":["GET","POST"]
   },
   {
     "name": "connexion",
@@ -24,6 +24,7 @@
     "name": "inscription",
     "path":"/inscription",
     "_controller": "App\\Controllers\\DefaultController",
-    "_method":["GET", "POST"]
+    "_method": "register",
+    "_methods":["GET", "POST"]
   }
 ]

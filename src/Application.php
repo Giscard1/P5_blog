@@ -30,7 +30,6 @@ class Application
             $context->setPathInfo($request->getUri()->getPath());
             $queryParams = $request->getQueryParams();
             $matcher = new UrlMatcher($this->routeCollection, $context);
-            var_dump($matcher);
 
             $parametersRoute = $matcher->match($request->getUri()->getPath());
             $controller = $parametersRoute['_controller'];
@@ -43,7 +42,6 @@ class Application
             return call_user_func_array($callable, [$request, $parametersRoute]);
 
         } catch (ResourceNotFoundException $e) {
-            var_dump($e);
 
             //TODO Create exception controller to return 404
         } catch (MethodNotAllowedException $e){
@@ -66,11 +64,12 @@ class Application
                 $route['name'],
                 new Route(
                     $route['path'],
-                    ['-controller' => $route['_controller'], '_method' => $route['_method']],
+                    ['_controller' => $route['_controller'], '_method' => $route['_method']],
                     [],
                     [],
                     '',
-                    $route['_method']
+                    [],
+                    $route['_methods']
                 )
             );
         }
