@@ -24,6 +24,10 @@ class UserRepository
         }
     }
 
+    public function newUser(){
+
+    }
+
     public function findAllUsers()
     {
         $query = "SELECT * FROM user";

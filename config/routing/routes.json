@@ -23,7 +23,7 @@
   {
     "name": "inscription",
     "path":"/inscription",
-    "_controller": "App\\Controllers\\DefaultController",
+    "_controller": "App\\Controllers\\InscriptionController",
     "_method": "register",
     "_methods":["GET", "POST"]
   }
