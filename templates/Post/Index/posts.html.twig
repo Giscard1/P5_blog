@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="titres">Mes articles</h2>
+
+        <div class="row">
+
+            {% for article in articles %}
+
+        <div class="col-md-4 col-sm-12">
+
+            <div class="card text-white bg-dark mb-3" style="max-width: 23rem">
+        <div class="card-header">{{article.title}}</div>
+        <div class="card-body">
+            <h5 class="card-title" id="indexArticleCardBody">{{article.chapo}}</h5>
+            <div class="card-footer text-muted">
+                <div class="row">
+                    <div class="col">
+                        {{ article.updateDate | date("d/m/y")}} par {{ article.user_last_name }}
+                    </div>
+                    <div class="col">
+                        {#<a href="{{ path('/thePost/{id}', {'id':article.id }) }}" class="btn btn-primary">lis</a>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+            {% endfor %}
+    </div>
+    </div>
+
+
+
+
+{% endblock %}

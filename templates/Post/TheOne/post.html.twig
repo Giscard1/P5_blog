@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>the one poste</h1>
+
+    <div class="container">
+        <div class="card text-center card text-white bg-dark mb-3">
+            <div class="card-header">
+                {{ article.post_title }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ article.post_chapo }}</h5>
+                <p class="card-text">{{ article.post_content }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                {{article.post_updateDate |  date("d/m/y") }} cette article a été crée par {{ article.user_last_name }}
+            </div>
+        </div>
+        <div class="row">
+                <div class="col">
+                    <form method="POST">
+                            <div class="col" id="input">
+                                <input type="text" name="comment" id="comment" class="form-control" placeholder="dit moi ce que tu penses">
+                            </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn btn-outline-secondary">Submit</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Tous les commentaires</h2>
+            </div>
+        </div>
+        {% for comment in comments %}
+            <div class="row">
+                {{ comment.content }}
+            </div>
+        {% endfor %}
+      {#  <div class="row">
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for comment in comments %}
+                        <tr>
+                            <td>{{ comment.content}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>#}
+    </div>
+
+{% endblock %}

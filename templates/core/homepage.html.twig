@@ -3,28 +3,44 @@
 {% block body %}
 
     <div class="container">
-        <h3>Me contacter</h3>
+        <div class="row" id="input">
 
-        <?php include('mail.php'); ?>
+            <div class="offset-md-4">
+                <fieldset>
+                    <img src="../../assets/logo/logo.png" alt="Le_logo" />
+                </fieldset>
+            </div>
+        </div>
+        <div class="row homepageSecondRow">
+            <div class="col">
+                <h4 id="nom">Giscard De Sousa</h4>
+            </div>
+            <div class="col">
+                <h4>Le développeur qu’il vous faut !</h4>
+            </div>
+        </div>
+            <h4 class="homepage_title">Me contacter</h4>
 
-        <form method="POST" action="mail.php">
+        <form method="POST">
             <div class="row">
-                <div class="col">
-                    <input type="text" name="firstname" class="form-control" placeholder="Prénom">
+                <div class="col" id="input">
+                    <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Prénom">
                 </div>
-                <div class="col">
-                    <input type="text" name="lastname" class="form-control" placeholder="Nom">
+                <div class="col" id="input">
+                    <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Nom">
                 </div>
-                <div class="col">
-                    <input type="email" name="email" class="form-control" placeholder="visiteur@gmail.com">
+                <div class="col" id="input">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="visiteur@gmail.com">
                 </div>
             </div>
             <div class="row">
-                <div class="col">
-                    <textarea class="form-control" name="body" placeholder="Dites-moi tout" rows="3"></textarea>
+                <div class="col" id="input">
+                    <textarea class="form-control" name="body" id="body" placeholder="Dites-moi tout" rows="3"></textarea>
                 </div>
             </div>
-                <input class="btn btn btn-outline-secondary" type="submit" value="Submit">
+<div class="offset-md-4">
+    <input class="btn btn-primary" type="submit" value="Envoyer">
+</div>
    </form>
     </div>
 {% endblock %}

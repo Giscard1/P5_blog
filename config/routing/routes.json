@@ -24,7 +24,56 @@
     "name": "inscription",
     "path":"/inscription",
     "_controller": "App\\Controllers\\InscriptionController",
-    "_method": "register",
+    "_method": "inscription",
     "_methods":["GET", "POST"]
+  },
+  {
+    "name": "logout",
+    "path":"/se-deconnecter",
+    "_controller":"App\\Controllers\\SecurityController",
+    "_method": "logout",
+    "_methods":["GET","POST"]
+  },
+  {
+    "name": "new_post",
+    "path": "/new_post",
+    "_controller": "App\\Controllers\\PostController",
+    "_method": "new_post",
+    "_methods": ["GET","POST"]
+  },
+  {
+    "name": "posts",
+    "path": "/indexPosts",
+    "_controller": "App\\Controllers\\PostController",
+    "_method": "index",
+    "_methods": ["GET","POST"]
+  },
+  {
+    "name": "post",
+    "path": "/thePost/{id}",
+    "_controller": "App\\Controllers\\PostController",
+    "_method": "thePost",
+    "_methods": ["GET","POST"]
+  },
+  {
+    "name": "dashbord_admin",
+    "path": "/admin",
+    "_controller": "App\\Controllers\\AdminController",
+    "_method": "index",
+    "_methods": ["GET","POST"]
+  },
+  {
+    "name": "delete_admin",
+    "path": "/admin/comments/{id}/delete",
+    "_controller": "App\\Controllers\\AdminController",
+    "_method": "deleteComment",
+    "_methods": ["GET","POST"]
+  },
+  {
+    "name": "valid_comment_admin",
+    "path": "/admin/comments/{id}/valid",
+    "_controller": "App\\Controllers\\AdminController",
+    "_method": "valid",
+    "_methods": ["GET","POST"]
   }
 ]

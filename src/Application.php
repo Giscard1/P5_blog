@@ -4,6 +4,7 @@
 namespace App;
 
 use App\Application\Http\Request;
+use App\Controllers\ErrorController;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -42,13 +43,21 @@ class Application
             return call_user_func_array($callable, [$request, $parametersRoute]);
 
         } catch (ResourceNotFoundException $e) {
-
+            $controller = new ErrorController();
+            var_dump($e);
+            return $controller->errorOccured(404);
             //TODO Create exception controller to return 404
         } catch (MethodNotAllowedException $e){
+            $controller = new ErrorController();
+            var_dump($e);
 
+            return $controller->errorOccured(500);
             //TODO Create exeption controller to return not allowed
         } catch (\Throwable $e) {
+            $controller = new ErrorController();
+            var_dump($e);
 
+            return $controller->errorOccured(500);
             //TODO create exeception to retuen internal error
         }
 

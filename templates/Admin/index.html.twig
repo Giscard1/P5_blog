@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Admin</h1>
+
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Article</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Commentaire</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Utilisateur</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+
+
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Chapo</th>
+                    <th scope="col">Contenue</th>
+                    <th scope="col">Date de mises à jour</th>
+                    <th scope="col">Id Utilisateur</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <th scope="row">{{ article.id }}</th>
+                        <td>{{ article.title}}</td>
+                        <td>{{article.chapo}}</td>
+                        <td>{{ article.content }}</td>
+                        <td>{{article.updateDate}}</td>
+                        <td>{{ article.user_id }}</td>
+                    </tr>
+                    </a>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Contenue</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Validé</th>
+                    <th scope="col">Article</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in comments %}
+                <tr>
+                    <th scope="row">{{ comment.id }}</th>
+                    <td>{{ comment.content}}</td>
+                    <td>{{comment.auther}}</td>
+                    <td>{{ comment.is_valid == '1' ? "Oui" : "Non" }}</td>
+                    <td>{{ comment.post_id }}</td>
+                    <td>
+                        <a href="{{ '/admin/comments/' ~ comment.id ~ '/valid' }}" type="button" class="btn btn-primary">Valider</a>
+                        <a href="{{ '/admin/comments/' ~ comment.id ~ '/delete' }}" type="button" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Validé</th>
+                    <th scope="col">Admin</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <th scope="row">{{ user.id }}</th>
+                        <td>{{ user.last_name}}</td>
+                        <td>{{user.first_name}}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.valid == '1' ? "Oui" : "Non" }}</td>
+                        <td>{{ user.admin == '1' ? "Oui" : "Non" }}</td>
+                        <form method="post">
+                            <td><input type="submit" name="btc-addToAdmin" value="Admin"></td>
+                            <td><input type="submit" name="btc-addToValid" value="Valider"></td>
+                            <td><input type="submit" name="btc-deleteUser" value="Suprimer"
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></td>
+                        </form>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -3,35 +3,96 @@
 {% block body %}
 
     <div class="container">
-        <h3>M'inscrire</h3>
-
-        <form method="POST" action="">
-            <div class="row">
-                <div class="col">
-                    <input type="text" name="firstname" class="form-control" placeholder="Prénom">
+        <h2 class="titres">Je m'inscris</h2>
+        <form method="POST">
+            <div class="row rowInscription">
+                    <div class="col-2 libelle">
+                        <label for="email">Prénom</label>
+                    </div>
+                <div class="col-10">
+                    <input type="text" name="firstname" id="firstname" class="form-control" placeholder="">
+                    {% if errors.firstname.required %}
+                        <div class='alert alert-danger'>
+                            <ul>
+                                {% if errors.firstname.required %}
+                                    <li>L'ajout de votre prénom est requis.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                </div>
+            <div class="row rowInscription">
+                <div class="col-2 libelle">
+                    <label for="email">Nom</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" name="lastname"  id="lastname" class="form-control" placeholder="">
+                    {% if errors.lastname.required %}
+                        <div class='alert alert-danger'>
+                            <ul>
+                                {% if errors.lastname.required %}
+                                    <li>L'ajout de votre nom est requis.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                </div>
+            <div class="row rowInscription">
+                <div class="col-2 libelle">
+                    <label for="email">Email</label>
+                </div>
+                <div class="col-10">
+                    <input type="email" name="email"  id="email" class="form-control" placeholder="">
+                    {% if errors.email.required %}
+                        <div class='alert alert-danger'>
+                            <ul>
+                                {% if errors.email.required %}
+                                    <li>L'ajout de votre mail est requis.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                </div>
+            <div class="row rowInscription">
+                    <div class="col-2 libelleMotDePasse">
+                        <label for="email">Mot de passe</label>
+                    </div>
+                <div class="col-10">
+                    <input type="text" name="password"  id="password" class="form-control" placeholder="">
+                    {% if errors.password.required %}
+                        <div class='alert alert-danger'>
+                            <ul>
+                                {% if errors.password.required %}
+                                    <li>Le mot de passe est obligatoire.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                </div>
+            <div class="row rowInscription">
+                <div class="col-2 libelleMotDePasse">
+                    <label for="email">Mot de passe</label>
+                </div>
+                <div class="col-10">
+                    <input type="text" name="password2"  id="password2" class="form-control" placeholder="Confirmer mot de passe">
+                    {% if errors.password.required %}
+                        <div class='alert alert-danger'>
+                            <ul>
+                                {% if errors.password.notTheSame %}
+                                    <li>Pas le meme mot de passe.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <input type="text" name="lastname" class="form-control" placeholder="Nom">
-                </div>
+            <div class="offset-5">
+                <button type="submit" class="btn btn-primary">M'inscrire</button>
             </div>
-            <div class="row">
-                <div class="col">
-                    <input type="email" name="email" class="form-control" placeholder="visiteur@gmail.com">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input type="email" name="password" class="form-control" placeholder="Mot de passe">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input type="email" name="password2" class="form-control" placeholder="Confirmer mot de passe">
-                </div>
-            </div>
-            <input class="btn btn btn-outline-secondary" type="submit" value="Submit">
         </form>
     </div>
 {% endblock %}
