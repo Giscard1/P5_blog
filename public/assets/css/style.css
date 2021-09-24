@@ -1,5 +1,4 @@
 #input{
-    margin-top: 2%;
     margin-bottom: 3%;
 }
 
@@ -22,9 +21,6 @@
     color: #f4f4f4;
 }
 
-.btn-outline-secondary{
-
-}
 .icons{
     padding-top: 1rem;
 }
@@ -76,4 +72,9 @@ text-align: center;
 }
 .rowInscription{
     margin-bottom: 3%;
+}
+
+#rowLabelContenue{
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
