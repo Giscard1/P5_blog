@@ -21,7 +21,7 @@
                         {{ article.updateDate | date("d/m/y")}} par {{ article.user_last_name }}
                     </div>
                     <div class="col">
-                        {#<a href="{{ path('/thePost/{id}', {'id':article.id }) }}" class="btn btn-primary">lis</a>#}
+                            <a href="{{ '/thePost/' ~ article.id  }}" type="button" class="btn btn-info btn-sm" style="margin-left: 50%">Lis moi</a>
                     </div>
                 </div>
             </div>

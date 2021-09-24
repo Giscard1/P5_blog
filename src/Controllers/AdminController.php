@@ -40,28 +40,6 @@ class AdminController extends AbstractController
             return $response->getBody();
         }
 
-        if (isset($_POST['btc-addToAdmin'])){
-            $this->userRepository->turnToAdmin($this->getCurrentUser()['id']);
-        } elseif (isset($_POST['btc-addToValid'])){
-            //TODO dev requete valider
-            $this->userRepository->turnToValid();
-        } elseif (isset($_POST['btn-deleteUser'])){
-            //
-            if (isset($_GET['id']) AND !empty($_GET['id'])){
-                //
-                $userId = $_GET['id'];
-                $this->userRepository->deleteUser($userId);
-            }
-        }
-        elseif (isset($_POST['validateComment'])){
-            //TODO DEV req pour valider com
-            $this->commentRepository->validateComment();
-        }elseif (isset($_POST['deleteComment'])){
-            //Todo dev req delete com
-            $this->commentRepository->deleteCom();
-        }
-
-
         $response =  new Response(
             200,
             [],
@@ -84,9 +62,35 @@ class AdminController extends AbstractController
         $this->redirect($request->getServerParams()['HTTP_REFERER']);
     }
 
+    public function deleteUser(ServerRequestInterface $request, array $params){
+
+        $this->userRepository->deleteUser((int) $params['id']);
+        $this->redirect($request->getServerParams()['HTTP_REFERER']);
+    }
+
+    public function deletePostAdmin(ServerRequestInterface $request, array $params){
+
+        $this->postRepository->deletePostAdmin((int) $params['id']);
+        $this->redirect($request->getServerParams()['HTTP_REFERER']);
+    }
+
     public function valid(ServerRequestInterface $request, array $params){
 
         $this->commentRepository->valid((int) $params['id']);
+        $this->redirect($request->getServerParams()['HTTP_REFERER']);
+    }
+
+
+
+    public function validUser(ServerRequestInterface $request, array $params){
+
+        $this->userRepository->validUser((int) $params['id']);
+        $this->redirect($request->getServerParams()['HTTP_REFERER']);
+    }
+
+    public function adminUser(ServerRequestInterface $request, array $params){
+
+        $this->userRepository->adminUser((int) $params['id']);
         $this->redirect($request->getServerParams()['HTTP_REFERER']);
     }
 

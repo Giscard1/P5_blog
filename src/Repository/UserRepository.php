@@ -18,29 +18,32 @@ class UserRepository extends AbstractRepository
     public function findByEmail($email)
     {
         $query = "SELECT * FROM user WHERE email = :email";
-
         return $this->database->request($query, [':email' => $email])->fetch();
     }
 
     public function findAll()
     {
         $query = "SELECT * FROM user";
-
         return $this->database->request($query)->fetchAll();
     }
 
-    public function turnToAdmin($id){
-        $user = new User();
-        $this->$user->setAdmin(1);
+    public function deleteUser(int $id){
+        $query = "DELETE FROM user WHERE id = :id";
+        return $this->database->request($query, [':id' => $id]);
     }
 
-    public function deleteUser($userId){
-
-          $query = "DELETE FROM user WHERE id = :userId";
-
-          return $this->database->request($query, [':userId' => $userId])->fetch();
-
+    public function validUser(int $id){
+        $query = "UPDATE user SET valid = true WHERE id = :id";
+        return $this->database->request($query, [':id' => $id]);
     }
+
+    public function adminUser(int $id){
+        $query = "UPDATE user SET admin = true WHERE id = :id";
+        return $this->database->request($query, [':id' => $id]);
+    }
+
+
+
 
     public function registerNewUser($dataSubmitted){
 

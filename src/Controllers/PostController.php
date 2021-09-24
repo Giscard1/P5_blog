@@ -23,34 +23,28 @@ class PostController extends AbstractController
         $this->commentRepository = new CommentRepository();
     }
 
-    public function new_post(ServerRequestInterface $request, array $params)
+    public function new_post(ServerRequestInterface $request,$id_User)
     {
         $errors = [];
         $dataSubmitted = [];
-
         if ($request->getMethod() === 'POST'){
 
             $dataSubmitted = $request->getParsedBody();
-
             if (strlen($dataSubmitted['title']) === 0){
                 $errors['title']['required'] = true;
             }
-
             if (strlen($dataSubmitted['chapo']) === 0) {
                 $errors['chapo']['required'] = true;
             }
-
             if (strlen($dataSubmitted['content']) === 0) {
                 $errors['content']['required'] = true;
             }
-
             //var_dump($dataSubmitted);
-
-
-            $this->postRepository->createNewPost($dataSubmitted);
-
+            //$this->postRepository->createNewPost($dataSubmitted,$id_user);
             var_dump($dataSubmitted);
+            $this->postRepository->createNewPost($dataSubmitted,(int) $this->getCurrentUser()['id']);
         };
+
 
         $response =  new Response(
             200,
@@ -115,8 +109,11 @@ class PostController extends AbstractController
         //var_dump($this->commentRepository->findAll());
 
         return $response->getBody();
+    }
 
-
+    public function goToPost(ServerRequestInterface $request, array $params){
+        $this->postRepository->findById((int) $params['id']);
+        $this->redirect($request->getServerParams()['HTTP_REFERER']);
     }
 
 }

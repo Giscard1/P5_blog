@@ -14,13 +14,6 @@
     "_methods":["GET","POST"]
   },
   {
-    "name": "edit_student",
-    "path":"/students/{id}/edit",
-    "_controller":"App\\Controllers\\StudentController",
-    "_method": "edit",
-    "_methods":["GET","POST"]
-  },
-  {
     "name": "inscription",
     "path":"/inscription",
     "_controller": "App\\Controllers\\InscriptionController",
@@ -74,6 +67,34 @@
     "path": "/admin/comments/{id}/valid",
     "_controller": "App\\Controllers\\AdminController",
     "_method": "valid",
+    "_methods": ["GET","POST"]
+  },
+  {
+    "name": "delete_user_admin",
+    "path": "/admin/user/{id}/delete",
+    "_controller": "App\\Controllers\\AdminController",
+    "_method": "deleteUser",
+    "_methods": ["GET","POST"]
+  },
+  {
+    "name": "valid_user_admin",
+    "path": "/admin/user/{id}/valid",
+    "_controller": "App\\Controllers\\AdminController",
+    "_method": "validUser",
+    "_methods": ["GET","POST"]
+  },
+  {
+    "name": "admin_user_admin",
+    "path": "/admin/user/{id}/admin",
+    "_controller": "App\\Controllers\\AdminController",
+    "_method": "adminUser",
+    "_methods": ["GET","POST"]
+  },
+  {
+    "name": "delete_post_admin",
+    "path": "/admin/post/{id}/delete",
+    "_controller": "App\\Controllers\\AdminController",
+    "_method": "deletePostAdmin",
     "_methods": ["GET","POST"]
   }
 ]

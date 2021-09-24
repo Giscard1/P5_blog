@@ -42,6 +42,10 @@
                         <td>{{ article.content }}</td>
                         <td>{{article.updateDate}}</td>
                         <td>{{ article.user_id }}</td>
+                        <td>
+                            <a href="{{ '/admin/article/' ~ article.id ~ '/admin' }}" type="button" class="btn btn-info">Réediter</a>
+                            <a href="{{ '/admin/post/' ~ article.id ~ '/delete' }}" type="button" class="btn btn-danger">Supprimer</a>
+                        </td>
                     </tr>
                     </a>
                 {% endfor %}
@@ -103,12 +107,11 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.valid == '1' ? "Oui" : "Non" }}</td>
                         <td>{{ user.admin == '1' ? "Oui" : "Non" }}</td>
-                        <form method="post">
-                            <td><input type="submit" name="btc-addToAdmin" value="Admin"></td>
-                            <td><input type="submit" name="btc-addToValid" value="Valider"></td>
-                            <td><input type="submit" name="btc-deleteUser" value="Suprimer"
-                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"></td>
-                        </form>
+                        <td>
+                            <a href="{{ '/admin/user/' ~ user.id ~ '/valid' }}" type="button" class="btn btn-success">Valider</a>
+                            <a href="{{ '/admin/user/' ~ user.id ~ '/admin' }}" type="button" class="btn btn-info">Admin</a>
+                            <a href="{{ '/admin/user/' ~ user.id ~ '/delete' }}" type="button" class="btn btn-danger">Supprimer</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

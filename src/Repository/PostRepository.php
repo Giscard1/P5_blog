@@ -8,7 +8,6 @@ class PostRepository extends AbstractRepository
 
 {
 
-
     protected function getTableName()
     {
         return 'post.';
@@ -17,9 +16,9 @@ class PostRepository extends AbstractRepository
     public function findAll()
     {
         $query = "SELECT p.*, u.last_name AS user_last_name 
-FROM post AS p
-INNER JOIN user AS u 
-ON p.user_id = u.id";
+                    FROM post AS p
+                    INNER JOIN user AS u 
+                    ON p.user_id = u.id";
 
         return $this->database->request($query)->fetchAll();
     }
@@ -61,22 +60,27 @@ ON p.user_id = u.id";
 
     }
 
-    public function createNewPost($dataSubmitted) {
+    public function deletePostAdmin(int $id){
+        $query = "DELETE FROM post WHERE id = :id";
+        return $this->database->request($query, [':id' => $id]);
+    }
 
+    public function createNewPost($dataSubmitted,$id_User) {
         $title = $dataSubmitted['title'];
         $chapo = $dataSubmitted['chapo'];
         $content = $dataSubmitted['content'];
-        $author = "none";
         $updateDate = new \DateTime();
 
-        $query = "INSERT INTO post (title, chapo, content, author, updateDate) 
-                    VALUES(:title, :chapo, :content, :author, :updateDate)";
-        $this->database->request($query, [':title' => $title,
+        $query = "INSERT INTO post (title, chapo, content, user_id, updateDate) 
+                    VALUES(:title, :chapo, :content, :user_id, :updateDate)";
+        $this->database->request($query,
+            [':title' => $title,
             ':chapo' => $chapo,
             ':content' => $content,
-            ':author' => $author,
+            ':user_id' => $id_User,
             ':updateDate' => $updateDate
         ]);
 
     }
+
 }
