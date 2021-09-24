@@ -96,5 +96,12 @@
     "_controller": "App\\Controllers\\AdminController",
     "_method": "deletePostAdmin",
     "_methods": ["GET","POST"]
+  },
+  {
+    "name": "admin_post_update",
+    "path": "/admin/article/{id}/update",
+    "_controller": "App\\Controllers\\AdminController",
+    "_method": "upDatePost",
+    "_methods": ["GET","POST"]
   }
 ]

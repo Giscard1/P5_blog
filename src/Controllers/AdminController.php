@@ -18,6 +18,10 @@ class AdminController extends AbstractController
      * @var UserRepository
      */
     public $userRepository;
+    /**
+     * @var PostRepository
+     */
+    public $postRepository;
 
 
     public function __construct()
@@ -80,8 +84,6 @@ class AdminController extends AbstractController
         $this->redirect($request->getServerParams()['HTTP_REFERER']);
     }
 
-
-
     public function validUser(ServerRequestInterface $request, array $params){
 
         $this->userRepository->validUser((int) $params['id']);
@@ -92,6 +94,42 @@ class AdminController extends AbstractController
 
         $this->userRepository->adminUser((int) $params['id']);
         $this->redirect($request->getServerParams()['HTTP_REFERER']);
+    }
+
+    public function upDatePost(ServerRequestInterface $request, array $params){
+
+        $errors = [];
+        $dataSubmitted = [];
+        if ($request->getMethod() === 'POST'){
+
+            $dataSubmitted = $request->getParsedBody();
+            if (strlen($dataSubmitted['title']) === 0){
+                $errors['title']['required'] = true;
+            }
+            if (strlen($dataSubmitted['chapo']) === 0) {
+                $errors['chapo']['required'] = true;
+            }
+            if (strlen($dataSubmitted['content']) === 0) {
+                $errors['content']['required'] = true;
+            }
+            //var_dump($dataSubmitted);
+            //$this->postRepository->createNewPost($dataSubmitted,$id_user);
+            var_dump($dataSubmitted);
+            $this->postRepository->update($dataSubmitted,(int)$this->getCurrentUser()['id']);
+        };
+
+
+        $response =  new Response(
+            200,
+            [],
+            $this->renderHtml('Post/New/post.html.twig',
+                ['errors' => $errors])
+        );
+
+        return $response->getBody();
+
+       // $this->postRepository->update((int) $params['id']);
+        //$this->redirect($request->getServerParams()['HTTP_REFERER']);
     }
 
 }

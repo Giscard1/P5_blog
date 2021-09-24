@@ -65,6 +65,28 @@ class PostRepository extends AbstractRepository
         return $this->database->request($query, [':id' => $id]);
     }
 
+    public function update($dataSubmitted,int $id){
+
+        $title = $dataSubmitted['title'];
+        $chapo = $dataSubmitted['chapo'];
+        $content = $dataSubmitted['content'];
+        $updateDate = new \DateTime();
+
+        $query = "UPDATE post SET (title, chapo, content, user_id, updateDate) 
+                    VALUES(:title, :chapo, :content, :user_id, :updateDate)
+                    WHERE id = :id";
+
+        $this->database->request($query,
+            [':title' => $title,
+                ':chapo' => $chapo,
+                ':content' => $content,
+                ':user_id' => $id,
+                ':updateDate' => $updateDate
+            ]);
+
+        //$query = "UPDATE post SET is_valid = true WHERE id = :id";
+    }
+
     public function createNewPost($dataSubmitted,$id_User) {
         $title = $dataSubmitted['title'];
         $chapo = $dataSubmitted['chapo'];
