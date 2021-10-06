@@ -33,7 +33,6 @@ class AdminController extends AbstractController
 
     public function index(ServerRequestInterface $request, array $parameters)
     {
-        $userId = null;
 
         if (!$this->isAdmin()) {
             $response =  new Response(
