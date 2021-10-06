@@ -33,28 +33,9 @@ class DefaultController extends AbstractController
 
                 );
             } catch (\Exception $e){
-                var_dump($e);
-            }
+                echo $e;}
 
-
-
-                /*
-                 * try {
-
-               $result = mail(
-                    'giscarddesousajunior@hotmail.fr',
-                    'un sujet',
-                    $dataSubmitted['firstname'],
-                    "MIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\n"
-                );
-               var_dump($result);
-            } catch (\Exception $e) {
-                var_dump($e);
-                exit;
-            }
-                 */
         };
-       // var_dump($_SESSION);
         $response =  new Response(
             200,
             [],

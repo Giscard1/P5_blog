@@ -28,7 +28,6 @@ class InscriptionController extends AbstractController
 
 
             if ($request->getMethod() === 'POST'){
-               // var_dump($request->getParsedBody());
                 //Todo Traitement des soumission formulaire
                 $dataSubmitted = $request->getParsedBody();
 
@@ -60,7 +59,6 @@ class InscriptionController extends AbstractController
 
                 $this->userRepository->registerNewUser($dataSubmitted);
 
-                //var_dump($dataSubmitted);
                 $message = 'Félicitation vous etes inscrit';
             };
 

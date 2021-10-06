@@ -54,7 +54,6 @@ class AdminController extends AbstractController
                         'articles' => $this->postRepository->findAll()
                     ])
             );
-            //var_dump($_SESSION);
             return $response->getBody();
 
     }
@@ -118,9 +117,6 @@ class AdminController extends AbstractController
             if (strlen($dataSubmitted['content']) === 0) {
                 $errors['content']['required'] = true;
             }
-            //var_dump($dataSubmitted);
-            //$this->postRepository->createNewPost($dataSubmitted,$id_user);
-            var_dump($dataSubmitted);
 
             $this->postRepository->update($dataSubmitted,(int)$this->getCurrentUser()['id']);
         };
@@ -135,8 +131,6 @@ class AdminController extends AbstractController
 
         return $response->getBody();
 
-       // $this->postRepository->update((int) $params['id']);
-        //$this->redirect($request->getServerParams()['HTTP_REFERER']);
     }
 
 }

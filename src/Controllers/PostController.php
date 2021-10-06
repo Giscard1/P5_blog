@@ -48,9 +48,6 @@ class PostController extends AbstractController
             if (strlen($dataSubmitted['content']) === 0) {
                 $errors['content']['required'] = true;
             }
-            //var_dump($dataSubmitted);
-            //$this->postRepository->createNewPost($dataSubmitted,$id_user);
-            var_dump($dataSubmitted);
             $this->postRepository->createNewPost($dataSubmitted,(int) $this->getCurrentUser()['id']);
         };
 
@@ -67,7 +64,6 @@ class PostController extends AbstractController
 
     public function index(ServerRequestInterface $request){
 
-        //$this->postRepository->findAll();
         $response =  new Response(
             200,
             [],
@@ -78,7 +74,6 @@ class PostController extends AbstractController
         );
 
         return $response->getBody();
-
 
     }
 
@@ -97,8 +92,6 @@ class PostController extends AbstractController
             }
 
             $this->commentRepository->submitComment($dataSubmitted,(int)$parameters['id'], (int) $this->getCurrentUser()['id']);
-
-            //var_dump($dataSubmitted);
         };
 
         $response =  new Response(
