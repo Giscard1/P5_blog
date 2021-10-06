@@ -42,14 +42,6 @@ class PostRepository extends AbstractRepository
 
     public function findOneById($id)
     {
-        /*
-         *  $query = "SELECT post.id AS post.id, post.title AS post.title, post.chapo AS post.chapo, post.content AS post.content, post.updateDate AS post.updateDate, user.last_name AS user.last_name
-        FROM 'post'
-        INNER JOIN user ON post.user_id = user.id
-        WHERE post.id = :id";
-
-        return $this->database->request($query, [':id' => $id])->fetch();
-         */
         $query = "SELECT p.id AS post_id, p.title AS post_title, p.chapo AS post_chapo, p.content AS post_content, p.updateDate AS post_updateDate, u.last_name AS user_last_name 
         FROM post AS p
         INNER JOIN user AS u 
@@ -57,7 +49,6 @@ class PostRepository extends AbstractRepository
         WHERE p.id = :id";
 
         return $this->database->request($query, [':id' => $id])->fetch();
-
     }
 
     public function deletePostAdmin(int $id){

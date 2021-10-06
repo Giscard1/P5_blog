@@ -25,7 +25,16 @@ class PostController extends AbstractController
 
     public function new_post(ServerRequestInterface $request,$id_User)
     {
-        $errors = [];
+        if (!$this->isAdmin()) {
+            $response =  new Response(
+                200,
+                [],
+                $this->renderHtml('errors/_403.html.twig')
+            );
+            return $response->getBody();
+        }
+
+            $errors = [];
         $dataSubmitted = [];
         if ($request->getMethod() === 'POST'){
 
@@ -45,15 +54,15 @@ class PostController extends AbstractController
             $this->postRepository->createNewPost($dataSubmitted,(int) $this->getCurrentUser()['id']);
         };
 
+            $response = new Response(
+                200,
+                [],
+                $this->renderHtml('Post/New/post.html.twig',
+                    ['errors' => $errors])
+            );
 
-        $response =  new Response(
-            200,
-            [],
-            $this->renderHtml('Post/New/post.html.twig',
-                ['errors' => $errors])
-        );
+            return $response->getBody();
 
-        return $response->getBody();
     }
 
     public function index(ServerRequestInterface $request){
@@ -101,12 +110,6 @@ class PostController extends AbstractController
                     'comments' => $this->commentRepository->findByArticleIdValid((int)$parameters['id'])
                 ])
         );
-
-        /*
-         *   var_dump($this->postRepository->findOneById((int)$parameters['id']));
-        exit;
-         */
-        //var_dump($this->commentRepository->findAll());
 
         return $response->getBody();
     }

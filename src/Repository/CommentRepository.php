@@ -19,6 +19,17 @@ class CommentRepository extends AbstractRepository
         return $this->database->request($query)->fetchAll();
     }
 
+    /*
+     * public function findAll($id)
+    {
+        $query = "SELECT c.id AS comment.id, c.comment AS content.comment, u.last_name AS user_last_name
+    FROM comment AS c
+    INNER JOIN user AS u
+    ON c.auther = :id";
+
+        return $this->database->request($query, [':id' => $id])->fetch();
+    }
+     */
     public function findAllValidComments()
     {
         $query = "SELECT c.content AS comment_content FROM comment AS c INNER JOIN post AS p ON c.post_id = p.id WHERE c.is_valid = 1 ANDWHERE ";

@@ -20,6 +20,24 @@
                             </ul>
                         </div>
                     {% endif %}
+                    {% if errors.firstname.sup %}
+                        <div class='alert alert-danger'>
+                            <ul>
+                                {% if errors.firstname.sup %}
+                                    <li>Le prénom ne doit pas etre supérieur a 32 caractères.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if errors.firstname.inf %}
+                        <div class='alert alert-danger'>
+                            <ul>
+                                {% if errors.firstname.inf %}
+                                    <li>Le prénom doit contenir plus d'une lettre.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
                 </div>
             <div class="row rowInscription">
@@ -33,6 +51,24 @@
                             <ul>
                                 {% if errors.lastname.required %}
                                     <li>L'ajout de votre nom est requis.</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        {%endif%}
+                            {% if errors.lastname.sup %}
+                                <div class='alert alert-danger'>
+                                    <ul>
+                                        {% if errors.lastname.sup %}
+                                        <li>Le prénom ne doit pas etre supérieur a 32 caractères.</li>
+                                     {% endif %}
+                                    </ul>
+                                </div>
+                             {% endif %}
+                    {% if errors.lastname.inf %}
+                        <div class='alert alert-danger'>
+                            <ul>
+                                {% if errors.lastname.inf %}
+                                    <li>Le prénom doit contenir plus d'une lettre.</li>
                                 {% endif %}
                             </ul>
                         </div>

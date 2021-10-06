@@ -20,5 +20,7 @@ trait TwigTrait
     {
         $loader = new FilesystemLoader(__DIR__.'/../../templates');
         $this->templating = new Environment($loader);
+
+        $this->templating->addGlobal('session', $_SESSION);
     }
 }

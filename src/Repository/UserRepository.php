@@ -42,6 +42,11 @@ class UserRepository extends AbstractRepository
         return $this->database->request($query, [':id' => $id]);
     }
 
+    public function normalUser(int $id){
+        $query = "UPDATE user SET admin = false WHERE id = :id";
+        return $this->database->request($query, [':id' => $id]);
+    }
+
 
 
 

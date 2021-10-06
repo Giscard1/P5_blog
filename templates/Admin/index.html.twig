@@ -75,8 +75,12 @@
                     <td>{{ comment.is_valid == '1' ? "Oui" : "Non" }}</td>
                     <td>{{ comment.post_id }}</td>
                     <td>
+                        {% if comment.is_valid == '0' %}
                         <a href="{{ '/admin/comments/' ~ comment.id ~ '/valid' }}" type="button" class="btn btn-primary">Valider</a>
-                        <a href="{{ '/admin/comments/' ~ comment.id ~ '/delete' }}" type="button" class="btn btn-danger">Supprimer</a>
+                        {% else %}
+                            <p>Validé</p>
+                                {% endif %}
+                        <a href="{{ '/admin/comments/' ~ comment.id ~ '/delete' }}" onclick="return confirm('Confirmation avant suppression')" type="button" class="btn btn-danger">Supprimer</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -110,6 +114,7 @@
                         <td>
                             <a href="{{ '/admin/user/' ~ user.id ~ '/valid' }}" type="button" class="btn btn-success">Valider</a>
                             <a href="{{ '/admin/user/' ~ user.id ~ '/admin' }}" type="button" class="btn btn-info">Admin</a>
+                            <a href="{{ '/admin/user/' ~ user.id ~ '/nonAdmin'}}" type="button" class="btn btn-warning">Non Admin</a>
                             <a href="{{ '/admin/user/' ~ user.id ~ '/delete' }}" type="button" class="btn btn-danger">Supprimer</a>
                         </td>
                     </tr>

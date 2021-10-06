@@ -44,19 +44,19 @@ class AdminController extends AbstractController
             return $response->getBody();
         }
 
-        $response =  new Response(
-            200,
-            [],
-            $this->renderHtml(
-                'Admin/index.html.twig',
-                [
-                    'comments' => $this->commentRepository->findAll(),
-                    'users' => $this->userRepository->findAll(),
-                    'articles' => $this->postRepository->findAll()
-                ])
-        );
-
-        return $response->getBody();
+            $response =  new Response(
+                200,
+                [],
+                $this->renderHtml(
+                    'Admin/index.html.twig',
+                    [
+                        'comments' => $this->commentRepository->findAll(),
+                        'users' => $this->userRepository->findAll(),
+                        'articles' => $this->postRepository->findAll()
+                    ])
+            );
+            //var_dump($_SESSION);
+            return $response->getBody();
 
     }
 
@@ -96,7 +96,14 @@ class AdminController extends AbstractController
         $this->redirect($request->getServerParams()['HTTP_REFERER']);
     }
 
+    public function normalUser(ServerRequestInterface $request, array $params){
+
+        $this->userRepository->normalUser((int) $params['id']);
+        $this->redirect($request->getServerParams()['HTTP_REFERER']);
+    }
+
     public function upDatePost(ServerRequestInterface $request, array $params){
+
 
         $errors = [];
         $dataSubmitted = [];
@@ -115,6 +122,7 @@ class AdminController extends AbstractController
             //var_dump($dataSubmitted);
             //$this->postRepository->createNewPost($dataSubmitted,$id_user);
             var_dump($dataSubmitted);
+
             $this->postRepository->update($dataSubmitted,(int)$this->getCurrentUser()['id']);
         };
 

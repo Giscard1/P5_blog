@@ -91,6 +91,13 @@
     "_methods": ["GET","POST"]
   },
   {
+    "name": "normal_user_admin",
+    "path": "/admin/user/{id}/nonAdmin",
+    "_controller": "App\\Controllers\\AdminController",
+    "_method": "normalUser",
+    "_methods": ["GET","POST"]
+  },
+  {
     "name": "delete_post_admin",
     "path": "/admin/post/{id}/delete",
     "_controller": "App\\Controllers\\AdminController",

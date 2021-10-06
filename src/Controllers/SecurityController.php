@@ -41,7 +41,7 @@ class SecurityController extends AbstractController
                     if ($dataSubmitted['password'] = $user['password']){
                         $_SESSION['user'] = $user;
 
-                        $this->redirect('/');
+                        $this->redirect('/homepage');
                     } else {
                         $errors[] = 'Identifiant';
                     }
@@ -68,7 +68,7 @@ class SecurityController extends AbstractController
     public function logout()
     {
         session_destroy();
-        $this->redirect('/');
+        $this->redirect('/homepage');
     }
 
 }

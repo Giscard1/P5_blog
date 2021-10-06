@@ -25,27 +25,43 @@ class InscriptionController extends AbstractController
             $errors = [];
             $dataSubmitted = [];
 
+
+
             if ($request->getMethod() === 'POST'){
-                var_dump($request->getParsedBody());
+               // var_dump($request->getParsedBody());
                 //Todo Traitement des soumission formulaire
                 $dataSubmitted = $request->getParsedBody();
 
+                // Vérification prenom
                 if (strlen($dataSubmitted['firstname']) === 0){
                     $errors['firstname']['required'] = true;
                 }
+                if (strlen($dataSubmitted['firstname']) > 32){
+                    $errors['firstname']['sup'] = true;
+                }
+                if (strlen($dataSubmitted['firstname']) < 2){
+                    $errors['firstname']['inf'] = true;
+                }
+                // Vérification nom
+
                 if (strlen($dataSubmitted['lastname']) === 0){
                     $errors['lastname']['required'] = true;
                 }
+                // Vérification email
+
                 if (strlen($dataSubmitted['email']) === 0){
                     $errors['email']['required'] = true;
                 }
+                // Vérification mot de passe
+
                 if (strlen($dataSubmitted['password']) === 0){
                     $errors['password']['required'] = true;
                 }
 
                 $this->userRepository->registerNewUser($dataSubmitted);
 
-                var_dump($dataSubmitted);
+                //var_dump($dataSubmitted);
+                $message = 'Félicitation vous etes inscrit';
             };
 
 
@@ -53,7 +69,8 @@ class InscriptionController extends AbstractController
                 200,
                 [],
                 $this->renderHtml('inscription/inscription.html.twig',
-                    ['errors' => $errors]
+                    ['errors' => $errors,
+                        $message = 'message']
                 )
             );
 
