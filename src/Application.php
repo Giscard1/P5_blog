@@ -29,7 +29,7 @@ class Application
 
             $context = new RequestContext();
             $context->setPathInfo($request->getUri()->getPath());
-            $queryParams = $request->getQueryParams();
+            //$queryParams = $request->getQueryParams();
             $matcher = new UrlMatcher($this->routeCollection, $context);
 
             $parametersRoute = $matcher->match($request->getUri()->getPath());
