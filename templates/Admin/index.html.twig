@@ -16,7 +16,7 @@
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Utilisateur</button>
         </li>
     </ul>
-
+Validé
     <div class="tab-content" id="myTabContent">
 
 
@@ -44,7 +44,7 @@
                         <td>{{ article.user_id }}</td>
                         <td>
                             <a href="{{ '/admin/article/' ~ article.id ~ '/update' }}" type="button" class="btn btn-info">Réediter</a>
-                            <a href="{{ '/admin/post/' ~ article.id ~ '/delete' }}" type="button" class="btn btn-danger">Supprimer</a>
+                            <a href="{{ '/admin/post/' ~ article.id ~ '/delete' }}" onclick="return confirm('Confirmation avant suppression de l\'article')" type="button" class="btn btn-danger">Supprimer</a>
                         </td>
                     </tr>
                     </a>
@@ -75,12 +75,10 @@
                     <td>{{ comment.is_valid == '1' ? "Oui" : "Non" }}</td>
                     <td>{{ comment.post_id }}</td>
                     <td>
+                        <a href="{{ '/admin/comments/' ~ comment.id ~ '/delete' }}" onclick="return confirm('Confirmation avant suppression')" type="button" class="btn btn-danger">Supprimer</a>
                         {% if comment.is_valid == '0' %}
                         <a href="{{ '/admin/comments/' ~ comment.id ~ '/valid' }}" type="button" class="btn btn-primary">Valider</a>
-                        {% else %}
-                            <p>Validé</p>
-                                {% endif %}
-                        <a href="{{ '/admin/comments/' ~ comment.id ~ '/delete' }}" onclick="return confirm('Confirmation avant suppression')" type="button" class="btn btn-danger">Supprimer</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -112,10 +110,18 @@
                         <td>{{ user.valid == '1' ? "Oui" : "Non" }}</td>
                         <td>{{ user.admin == '1' ? "Oui" : "Non" }}</td>
                         <td>
+                            {% if user.valid == '1' %}
                             <a href="{{ '/admin/user/' ~ user.id ~ '/valid' }}" type="button" class="btn btn-success">Valider</a>
-                            <a href="{{ '/admin/user/' ~ user.id ~ '/admin' }}" type="button" class="btn btn-info">Admin</a>
-                            <a href="{{ '/admin/user/' ~ user.id ~ '/nonAdmin'}}" type="button" class="btn btn-warning">Non Admin</a>
-                            <a href="{{ '/admin/user/' ~ user.id ~ '/delete' }}" type="button" class="btn btn-danger">Supprimer</a>
+                            {% endif %}
+                            {% if user.admin == '1' %}
+                            <a href="{{ '/admin/user/' ~ user.id ~ '/admin' }}" onclick="return confirm('Confirmation avant le passage du statut admin')" type="button" class="btn btn-info">Admin</a>
+                            {% endif %}
+                            {% if user.admin == '0' %}
+                            <a href="{{ '/admin/user/' ~ user.id ~ '/nonAdmin'}}" onclick="return confirm('Confirmation')" type="button" class="btn btn-warning">Non Admin</a>
+                            {% endif %}
+                            {% if user %}
+                            <a href="{{ '/admin/user/' ~ user.id ~ '/delete' }}" onclick="return confirm('Confirmation avant suppression de l\'utilisateur')" type="button" class="btn btn-danger">Supprimer</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

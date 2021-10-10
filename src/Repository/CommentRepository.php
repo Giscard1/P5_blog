@@ -7,7 +7,6 @@ namespace App\Repository;
 class CommentRepository extends AbstractRepository
 
 {
-
     protected function getTableName()
     {
         return 'comment.';
@@ -32,13 +31,27 @@ class CommentRepository extends AbstractRepository
      */
     public function findAllValidComments()
     {
-        $query = "SELECT c.content AS comment_content FROM comment AS c INNER JOIN post AS p ON c.post_id = p.id WHERE c.is_valid = 1 ANDWHERE ";
+        $query = "SELECT * FROM comment WHERE comment.is_valid = 1";
         return $this->database->request($query)->fetchAll();
     }
+/*
+ *  public function findByArticleIdValid($id)
+    {
+        $query = "SELECT * FROM comment WHERE post_id = :id AND is_valid = 1";
+        return $this->database->request($query, [':id' => $id])->fetchAll();
+    }
+ */
+
+//        $query = "SELECT c.content AS comment_content, c.date_validation AS comment_date_validation, u.last_name AS user_last_name
 
     public function findByArticleIdValid($id)
     {
-        $query = "SELECT * FROM comment WHERE post_id = :id AND is_valid = 1";
+        $query = "SELECT c.*, u.last_name AS user_last_name
+        FROM comment AS c
+        INNER JOIN user AS u
+        ON c.auther = u.id
+        WHERE c.is_valid = 1
+        AND c.post_id = :id";
         return $this->database->request($query, [':id' => $id])->fetchAll();
     }
 
@@ -58,26 +71,22 @@ class CommentRepository extends AbstractRepository
         return $this->database->request($query, [':id' => $id]);
     }
 
-
-
     //function doit prendre comme parametre, id de l'utilisateur connecter et l'id du post
     public function submitComment($dataSubmitted,$idPost, $idUser){
 
         $content = $dataSubmitted['comment'];
         $isValid = 0;
+        $dateValidation = new \DateTime();
 
-        $query = "INSERT INTO comment (content, is_valid, post_id, auther) 
-                    VALUES(:content, :is_valid, :post_id, :auther) ";
+        $query = "INSERT INTO comment (content, is_valid, post_id, auther, date_validation) 
+                    VALUES(:content, :is_valid, :post_id, :auther, :date_validation)";
 
-        $statement = $this->database->prepare($query);
-
-        $statement->execute([':content' => $content,
+        $this->database->request($query,
+            [':content' => $content,
             ':is_valid' => $isValid,
             ':post_id' => $idPost,
             ':auther' => $idUser,
-           ]);
+            ':date_validation' => $dateValidation
+            ]);
     }
-
-
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controllers;
 
 use App\Repository\PostRepository;
@@ -39,7 +38,7 @@ class PostController extends AbstractController
         if ($request->getMethod() === 'POST'){
 
             $dataSubmitted = $request->getParsedBody();
-            if (strlen($dataSubmitted['title']) === 0){
+            if (strlen($dataSubmitted['title']) === 0) {
                 $errors['title']['required'] = true;
             }
             if (strlen($dataSubmitted['chapo']) === 0) {
@@ -59,7 +58,6 @@ class PostController extends AbstractController
             );
 
             return $response->getBody();
-
     }
 
     public function index(ServerRequestInterface $request){
@@ -74,9 +72,7 @@ class PostController extends AbstractController
         );
 
         return $response->getBody();
-
     }
-
 
     public function thePost(ServerRequestInterface $request, array $parameters){
 

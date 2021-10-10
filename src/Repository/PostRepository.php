@@ -15,10 +15,7 @@ class PostRepository extends AbstractRepository
 
     public function findAll()
     {
-        $query = "SELECT p.*, u.last_name AS user_last_name 
-                    FROM post AS p
-                    INNER JOIN user AS u 
-                    ON p.user_id = u.id";
+        $query = "SELECT * FROM post";
 
         return $this->database->request($query)->fetchAll();
     }
@@ -93,7 +90,5 @@ class PostRepository extends AbstractRepository
             ':user_id' => $id_User,
             ':updateDate' => $updateDate
         ]);
-
     }
-
 }

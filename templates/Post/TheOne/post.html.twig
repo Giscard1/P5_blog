@@ -34,11 +34,8 @@
         </div>
         {% for comment in comments %}
             <div class="commentSection">
-            <div class="row">
-                <div class="col">
-                    {{ comment.user_last_name }}
-                </div>
-            </div>
+                <p style="font-weight: bolder">Crée par {{ comment.user_last_name }} le
+                    {{ comment.date_validation |  date("d/m/y")}}</p>
             <div class="row">
                 <div class="col">
                     <div class="card" id="cardComment">
