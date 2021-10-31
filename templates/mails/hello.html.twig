@@ -13,5 +13,9 @@
 
 {% block body %}
 
-<h1>Merci pour votre mail {{ name }}</h1>
+<h1>Mail de la part de  {{ firstname }} {{ lastname }}</h1>
+    <p>
+        contenu : {{ body }}
+    </p>
+    <p>repondre à : {{ email }}</p>
 {% endblock %}

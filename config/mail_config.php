@@ -2,5 +2,5 @@
 
 return [
     'email' => 'giscard.dsj@gmail.com',
-    'password' => 'Paulinha@Nicole@1988'
+    'password' => 'Nicole@1988'
 ];

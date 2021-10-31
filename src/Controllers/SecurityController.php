@@ -40,7 +40,6 @@ class SecurityController extends AbstractController
                     //Todo 3. Coparaison des mot de passe soumises et en BDD
                     if ($dataSubmitted['password'] = $user['password']){
                         $_SESSION['user'] = $user;
-
                         $this->redirect('/homepage');
                     } else {
                         $errors[] = 'Identifiant';

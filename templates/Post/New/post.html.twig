@@ -11,7 +11,7 @@
                         <label for="title" class="libelle">Title</label>
                     </div>
                     <div class="col-10">
-                            <input type="text" name="title" class="form-control">
+                            <input type="text" name="title" class="form-control" value="{{ article ? article.title : '' }}" />
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                         <label for="chapo" class="libelle">Chapo</label>
                     </div>
                     <div class="col-10">
-                        <input type="text" name="chapo" class="form-control">
+                        <input type="text" name="chapo" class="form-control" value="{{ article ? article.chapo : '' }}" />
                     </div>
                 </div>
             </div>
@@ -33,7 +33,9 @@
         </div>
         <div class="row">
             <div class="col" id="input">
-                <textarea class="form-control" name="content" id="content" placeholder="Lorem Ipsum is simply dummy text of the..."></textarea>
+                <textarea class="form-control" name="content" id="content" placeholder="Lorem Ipsum is simply dummy text of the...">
+                    {{ article ? article.content : '' }}
+                </textarea>
             </div>
         </div>
         <div class="row">

@@ -110,13 +110,13 @@ Validé
                         <td>{{ user.valid == '1' ? "Oui" : "Non" }}</td>
                         <td>{{ user.admin == '1' ? "Oui" : "Non" }}</td>
                         <td>
-                            {% if user.valid == '1' %}
+                            {% if user.valid == '0' %}
                             <a href="{{ '/admin/user/' ~ user.id ~ '/valid' }}" type="button" class="btn btn-success">Valider</a>
                             {% endif %}
-                            {% if user.admin == '1' %}
+                            {% if user.admin == '0' %}
                             <a href="{{ '/admin/user/' ~ user.id ~ '/admin' }}" onclick="return confirm('Confirmation avant le passage du statut admin')" type="button" class="btn btn-info">Admin</a>
                             {% endif %}
-                            {% if user.admin == '0' %}
+                            {% if user.admin == '1' %}
                             <a href="{{ '/admin/user/' ~ user.id ~ '/nonAdmin'}}" onclick="return confirm('Confirmation')" type="button" class="btn btn-warning">Non Admin</a>
                             {% endif %}
                             {% if user %}

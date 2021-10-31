@@ -22,19 +22,17 @@ class DefaultController extends AbstractController
         if ($request->getMethod() === 'POST')
         {
             $dataSubmitted = $request->getParsedBody();
-            var_dump($dataSubmitted);
-
+            //var_dump($dataSubmitted);
             try {
                 $this->mailer->send(
-                    'test',
+                    'Blog P5',
                     'giscard.dsj@gmail.com',
-                    'toto@gmail.fr',
-                    $this->renderHtml('mails/hello.html.twig', ['name' => 'titi'])
+                    'giscard.dsj@gmail.com',
+                    $this->renderHtml('mails/hello.html.twig', $dataSubmitted)
 
                 );
             } catch (\Exception $e){
                 echo $e;}
-
         };
         $response =  new Response(
             200,

@@ -25,8 +25,6 @@ class InscriptionController extends AbstractController
             $errors = [];
             $dataSubmitted = [];
 
-
-
             if ($request->getMethod() === 'POST'){
                 //Todo Traitement des soumission formulaire
                 $dataSubmitted = $request->getParsedBody();
@@ -56,12 +54,10 @@ class InscriptionController extends AbstractController
                 if (strlen($dataSubmitted['password']) === 0){
                     $errors['password']['required'] = true;
                 }
-
                 $this->userRepository->registerNewUser($dataSubmitted);
 
                 $message = 'Félicitation vous etes inscrit';
             };
-
 
             $response =  new Response(
                 200,
@@ -74,11 +70,4 @@ class InscriptionController extends AbstractController
 
             return $response->getBody();
         }
-
-
-
-
-
-
-
 }

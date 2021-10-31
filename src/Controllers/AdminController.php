@@ -68,6 +68,8 @@ class AdminController extends AbstractController
 
         $this->userRepository->deleteUser((int) $params['id']);
         $this->redirect($request->getServerParams()['HTTP_REFERER']);
+
+        $this->successMessage = "Utilisateur supprimé avec succés";
     }
 
     public function deletePostAdmin(ServerRequestInterface $request, array $params){
@@ -102,9 +104,9 @@ class AdminController extends AbstractController
 
     public function upDatePost(ServerRequestInterface $request, array $params){
 
-
         $errors = [];
-        $dataSubmitted = [];
+        $id = (int) $params['id'];
+        $article = $this->postRepository->findById($id);
         if ($request->getMethod() === 'POST'){
 
             $dataSubmitted = $request->getParsedBody();
@@ -117,8 +119,10 @@ class AdminController extends AbstractController
             if (strlen($dataSubmitted['content']) === 0) {
                 $errors['content']['required'] = true;
             }
-
-            $this->postRepository->update($dataSubmitted,(int)$this->getCurrentUser()['id']);
+            if (count($errors) === 0){
+                $this->postRepository->update($dataSubmitted,(int)$this->getCurrentUser()['id'], $id);
+                $this->redirect($request->getServerParams()['HTTP_REFERER']);
+            }
         };
 
 
@@ -126,7 +130,7 @@ class AdminController extends AbstractController
             200,
             [],
             $this->renderHtml('Post/New/post.html.twig',
-                ['errors' => $errors])
+                ['errors' => $errors, 'article' => $article])
         );
 
         return $response->getBody();

@@ -70,7 +70,6 @@ class PostController extends AbstractController
                         'articles' => $this->postRepository->findAll()
                 ])
         );
-
         return $response->getBody();
     }
 
@@ -86,7 +85,6 @@ class PostController extends AbstractController
             if (strlen($dataSubmitted['comment']) === 0){
                 $errors['comment']['required'] = true;
             }
-
             $this->commentRepository->submitComment($dataSubmitted,(int)$parameters['id'], (int) $this->getCurrentUser()['id']);
         };
 
@@ -101,11 +99,6 @@ class PostController extends AbstractController
         );
 
         return $response->getBody();
-    }
-
-    public function goToPost(ServerRequestInterface $request, array $params){
-        $this->postRepository->findById((int) $params['id']);
-        $this->redirect($request->getServerParams()['HTTP_REFERER']);
     }
 
 }

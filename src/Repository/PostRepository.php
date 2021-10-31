@@ -15,14 +15,17 @@ class PostRepository extends AbstractRepository
 
     public function findAll()
     {
-        $query = "SELECT * FROM post";
+        $query = "SELECT p.*, u.last_name AS user_last_name
+        FROM post AS p
+        INNER JOIN user AS u
+        ON p.user_id = u.id";
 
         return $this->database->request($query)->fetchAll();
     }
 
     public function findById($id)
     {
-        $query = "SELECT * FROM comment WHERE post_id = :id";
+        $query = "SELECT * FROM post WHERE id = :id";
 
         return $this->database->request($query, [':id' => $id])->fetch();
     }
@@ -53,23 +56,24 @@ class PostRepository extends AbstractRepository
         return $this->database->request($query, [':id' => $id]);
     }
 
-    public function update($dataSubmitted,int $id){
+    public function update($dataSubmitted, int $idUser, int $id){
 
         $title = $dataSubmitted['title'];
         $chapo = $dataSubmitted['chapo'];
         $content = $dataSubmitted['content'];
         $updateDate = new \DateTime();
 
-        $query = "UPDATE post SET (title, chapo, content, user_id, updateDate) 
-                    VALUES(:title, :chapo, :content, :user_id, :updateDate)
-                    WHERE id = :id";
+        $query = "UPDATE post SET title = :title, chapo = :chapo, content = :content,
+                     user_id = :user_id, updateDate = :updateDate
+                    WHERE id = :idpost";
 
         $this->database->request($query,
             [':title' => $title,
                 ':chapo' => $chapo,
                 ':content' => $content,
-                ':user_id' => $id,
-                ':updateDate' => $updateDate
+                ':user_id' => $idUser,
+                ':updateDate' => $updateDate,
+                ':idpost' => $id,
             ]);
 
         //$query = "UPDATE post SET is_valid = true WHERE id = :id";
