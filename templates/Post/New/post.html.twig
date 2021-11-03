@@ -12,6 +12,33 @@
                     </div>
                     <div class="col-10">
                             <input type="text" name="title" class="form-control" value="{{ article ? article.title : '' }}" />
+                        {% if errors.title.required %}
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    {% if errors.title.required %}
+                                        <li>L'ajout d'un titre est requis.</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        {% if errors.title.sup %}
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    {% if errors.title.sup %}
+                                        <li>Le titre ne doit pas etre supérieur a 32 caractères.</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        {% if errors.title.inf %}
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    {% if errors.title.inf %}
+                                        <li>Le titre doit contenir plus d'une lettre.</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -22,6 +49,33 @@
                     </div>
                     <div class="col-10">
                         <input type="text" name="chapo" class="form-control" value="{{ article ? article.chapo : '' }}" />
+                        {% if errors.chapo.required %}
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    {% if errors.chapo.required %}
+                                        <li>L'ajout d'un chapo est requis.</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        {% if errors.chapo.sup %}
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    {% if errors.chapo.sup %}
+                                        <li>Le chapo ne doit pas etre supérieur a 32 caractères.</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        {% if errors.chapo.inf %}
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    {% if errors.chapo.inf %}
+                                        <li>Le chapo doit contenir plus d'une lettre.</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -38,6 +92,7 @@
                 </textarea>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-5 offset-md-5">
                 <button type="submit" class="btn btn-primary">Envoyer</button>

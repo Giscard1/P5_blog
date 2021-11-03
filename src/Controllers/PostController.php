@@ -22,7 +22,7 @@ class PostController extends AbstractController
         $this->commentRepository = new CommentRepository();
     }
 
-    public function new_post(ServerRequestInterface $request,$id_User)
+    public function new_post(ServerRequestInterface $request, array $params)
     {
         if (!$this->isAdmin()) {
             $response =  new Response(
@@ -32,31 +32,49 @@ class PostController extends AbstractController
             );
             return $response->getBody();
         }
-
-            $errors = [];
+        $errors = [];
         $dataSubmitted = [];
         if ($request->getMethod() === 'POST'){
-
             $dataSubmitted = $request->getParsedBody();
+
+            // Vérification title
             if (strlen($dataSubmitted['title']) === 0) {
                 $errors['title']['required'] = true;
             }
+            if (strlen($dataSubmitted['title']) > 32) {
+                $errors['title']['sup'] = true;
+            }
+            if (strlen($dataSubmitted['title']) < 2){
+                $errors['title']['inf'] = true;
+            }
+            // Vérification chapo
             if (strlen($dataSubmitted['chapo']) === 0) {
                 $errors['chapo']['required'] = true;
             }
+            if (strlen($dataSubmitted['chapo']) > 32) {
+                $errors['chapo']['sup'] = true;
+            }
+            if (strlen($dataSubmitted['chapo']) < 2){
+                $errors['chapo']['inf'] = true;
+            }
+            // Vérification content
             if (strlen($dataSubmitted['content']) === 0) {
                 $errors['content']['required'] = true;
             }
-            $this->postRepository->createNewPost($dataSubmitted,(int) $this->getCurrentUser()['id']);
+            if (strlen($dataSubmitted['content']) < 2){
+                $errors['content']['inf'] = true;
+            }
+            if (count($errors) === 0){
+                $this->postRepository->createNewPost($dataSubmitted,(int) $this->getCurrentUser()['id']);
+                $this->redirect('/homepage');
+            }
         };
-
             $response = new Response(
                 200,
                 [],
                 $this->renderHtml('Post/New/post.html.twig',
                     ['errors' => $errors])
             );
-
             return $response->getBody();
     }
 
@@ -85,20 +103,20 @@ class PostController extends AbstractController
             if (strlen($dataSubmitted['comment']) === 0){
                 $errors['comment']['required'] = true;
             }
-            $this->commentRepository->submitComment($dataSubmitted,(int)$parameters['id'], (int) $this->getCurrentUser()['id']);
+            if (count($errors) === 0){
+                $this->commentRepository->submitComment($dataSubmitted,(int)$parameters['id'], (int) $this->getCurrentUser()['id']);
+            }
         };
-
         $response =  new Response(
             200,
             [],
             $this->renderHtml('Post/TheOne/post.html.twig',
                 [
                     'article' => $this->postRepository->findOneById((int)$parameters['id']),
-                    'comments' => $this->commentRepository->findByArticleIdValid((int)$parameters['id'])
+                    'comments' => $this->commentRepository->findByArticleIdValid((int)$parameters['id']),
+                    'errors' => $errors
                 ])
         );
-
         return $response->getBody();
     }
-
 }

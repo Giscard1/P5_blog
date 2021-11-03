@@ -23,6 +23,5 @@ abstract class AbstractRepository
            var_dump($e);
         }
     }
-
     abstract protected function getTableName();
 }

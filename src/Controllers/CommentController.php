@@ -11,12 +11,10 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class CommentController extends AbstractController
 {
-
     protected CommentRepository $commentRepository;
 
     public function __construct()
     {
         $this->commentRepository = new CommentRepository();
     }
-
 }

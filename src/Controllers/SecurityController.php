@@ -21,16 +21,10 @@ class SecurityController extends AbstractController
     public function login(ServerRequestInterface $request)
     {
         $errors = [];
-
         if ($request->getMethod() === 'POST') {
             $dataSubmitted = $request->getParsedBody();
             //TODO 1. Vérification des champs obligatoires
-            /*if (strlen(trim($dataSubmitted['email'])) === 0 || strlen(trim($dataSubmitted['password'])) === 0) {
-                $errors[] = 'Tous les champs sont requis';
-            }
-            */
             if (!validators::isNotBlank($dataSubmitted['email']) || !validators::isNotBlank($dataSubmitted['password'])) {
-
                 $errors[] = 'Tous les champs sont requis';
             } else {
                 //Todo 2. Récupération de l'email de l'utilisateur en bdd
@@ -48,7 +42,6 @@ class SecurityController extends AbstractController
                     $errors[] = 'Identifant invalides';
                 }
             }
-
         }
         $response =  new Response(
             200,
@@ -60,8 +53,6 @@ class SecurityController extends AbstractController
         );
 
         return $response->getBody();
-
-
     }
 
     public function logout()
@@ -69,5 +60,4 @@ class SecurityController extends AbstractController
         session_destroy();
         $this->redirect('/homepage');
     }
-
 }

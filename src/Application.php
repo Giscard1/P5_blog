@@ -22,11 +22,9 @@ class Application
         $this->initRouter();
     }
 
-
     public function run(ServerRequestInterface $request)
     {
         try{
-
             $context = new RequestContext();
             $context->setPathInfo($request->getUri()->getPath());
             $matcher = new UrlMatcher($this->routeCollection, $context);

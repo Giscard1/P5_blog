@@ -29,7 +29,6 @@ class DefaultController extends AbstractController
                     'giscard.dsj@gmail.com',
                     'giscard.dsj@gmail.com',
                     $this->renderHtml('mails/hello.html.twig', $dataSubmitted)
-
                 );
             } catch (\Exception $e){
                 echo $e;}

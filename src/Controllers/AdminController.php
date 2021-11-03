@@ -121,10 +121,9 @@ class AdminController extends AbstractController
             }
             if (count($errors) === 0){
                 $this->postRepository->update($dataSubmitted,(int)$this->getCurrentUser()['id'], $id);
-                $this->redirect($request->getServerParams()['HTTP_REFERER']);
+                $this->redirect('/indexPosts');
             }
         };
-
 
         $response =  new Response(
             200,

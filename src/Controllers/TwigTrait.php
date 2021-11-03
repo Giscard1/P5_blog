@@ -12,7 +12,6 @@ trait TwigTrait
     public function renderHtml($template, array $params = [])
     {
         $this->configure();
-
         return $this->templating->render($template, $params);
     }
 
@@ -20,7 +19,6 @@ trait TwigTrait
     {
         $loader = new FilesystemLoader(__DIR__.'/../../templates');
         $this->templating = new Environment($loader);
-
         $this->templating->addGlobal('session', $_SESSION);
     }
 }

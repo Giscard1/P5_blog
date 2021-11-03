@@ -19,25 +19,13 @@ class PostRepository extends AbstractRepository
         FROM post AS p
         INNER JOIN user AS u
         ON p.user_id = u.id";
-
         return $this->database->request($query)->fetchAll();
     }
 
     public function findById($id)
     {
         $query = "SELECT * FROM post WHERE id = :id";
-
         return $this->database->request($query, [':id' => $id])->fetch();
-    }
-
-    public function findAllValidComments()
-    {
-        $query = "SELECT c.content AS comment_content 
-        FROM comment AS c
-        INNER JOIN post AS p ON c.post_id = p.id 
-        WHERE c.is_valid = 1";
-
-        return $this->database->request($query, )->fetchAll();
     }
 
     public function findOneById($id)
@@ -47,7 +35,6 @@ class PostRepository extends AbstractRepository
         INNER JOIN user AS u 
         ON p.user_id = u.id
         WHERE p.id = :id";
-
         return $this->database->request($query, [':id' => $id])->fetch();
     }
 
@@ -75,8 +62,6 @@ class PostRepository extends AbstractRepository
                 ':updateDate' => $updateDate,
                 ':idpost' => $id,
             ]);
-
-        //$query = "UPDATE post SET is_valid = true WHERE id = :id";
     }
 
     public function createNewPost($dataSubmitted,$id_User) {

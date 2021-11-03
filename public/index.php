@@ -9,10 +9,3 @@ session_start();
 $request = Request::fromGlobals();
 $application = new Application();
 echo $application->run($request);
-
-
-/*
-$test = new \App\Test();
-echo $test->list();
-*/
-

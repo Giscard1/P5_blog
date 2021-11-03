@@ -21,6 +21,15 @@
                     <form method="POST">
                             <div class="col" id="input">
                                 <input type="text" name="comment" id="comment" class="form-control" placeholder="dit moi ce que tu penses">
+                                {% if errors.comment.required %}
+                                    <div class='alert alert-danger'>
+                                        <ul>
+                                            {% if errors.comment.required %}
+                                                <li>Le champ ne doit pas etre vide.</li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
                             </div>
                         <div class="offset-md-5">
                             <button type="submit" class="btn btn btn-outline-secondary">Submit</button>
@@ -29,9 +38,6 @@
             </div>
         </div>
         {% endif %}
-        <div class="row">
-
-        </div>
         {% for comment in comments %}
             <div class="commentSection">
                 <p style="font-weight: bolder">Crée par {{ comment.user_last_name }} le

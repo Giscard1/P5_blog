@@ -21,7 +21,6 @@ class InscriptionController extends AbstractController
 
         public function inscription(ServerRequestInterface $request, array $params)
         {
-
             $errors = [];
             $dataSubmitted = [];
 
@@ -54,20 +53,19 @@ class InscriptionController extends AbstractController
                 if (strlen($dataSubmitted['password']) === 0){
                     $errors['password']['required'] = true;
                 }
-                $this->userRepository->registerNewUser($dataSubmitted);
-
-                $message = 'Félicitation vous etes inscrit';
+                if (count($errors) === 0){
+                    $this->userRepository->registerNewUser($dataSubmitted);
+                    $this->redirect('/homepage');
+                }
             };
-
-            $response =  new Response(
-                200,
-                [],
-                $this->renderHtml('inscription/inscription.html.twig',
-                    ['errors' => $errors,
-                        $message = 'message']
-                )
-            );
-
-            return $response->getBody();
-        }
+                $response =  new Response(
+                    200,
+                    [],
+                    $this->renderHtml('inscription/inscription.html.twig',
+                        ['errors' => $errors,
+                            $message = 'message']
+                    )
+                );
+                return $response->getBody();
+            }
 }

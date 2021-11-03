@@ -67,7 +67,6 @@ class Comment
         $this->id = $id;
     }
 
-
     /**
      * @return mixed
      */
@@ -115,6 +114,4 @@ class Comment
     {
         $this->dateValidation = $dateValidation;
     }
-
-
 }
