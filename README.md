@@ -38,7 +38,6 @@ Administrateur:
 Informations:
 
 Le Front-end a été développé avec Bootstrap.
-Vous pouvez directement vous identifier en tant qu’administrateur:
 
 
 Prérequis:
@@ -48,12 +47,28 @@ Installation
 
 Etape 1 : Cloner le Repositary sur votre serveur.
 Etape 2 : Créer une base de données sur votre SGBD.
-Etape 3 : Remplir le fichier App/Config/mail_config.php avec les accès à votre compte email.
-Etape 4 : Votre blog est désormais fonctionnel.
+Etape 3 : Nommez la base de données P5.
+Etape 4 : Entrez vos informations de connexion à la base de données dans le fichier Config/db_config.php
+Etape 5 : Remplir le fichier App/Config/mail_config.php avec les accès à votre compte email.
+Etape 6 : Installer les dependances 
+           Twig -> composer require "twig/twig:^2.0"
+           Swiftmailer -> composer require "swiftmailer/swiftmailer:^6.0"
+           Slim Framework CSRF Protection -> composer require slim/csrf
+           Slim Framework Twig View -> composer require slim/twig-view:^3.0
+           Symfony routing -> composer require symfony/routing:^3.4
+Etape 7 : Votre blog est désormais fonctionnel.
+
 
 Librairies utilisées
     • Bootstrap
     • Swiftmailer
     • Twig
+    • Slim Framework CSRF Protection
+    • Slim Framework Twig View
+    • Symfony routing
+
+
+
+    
 
 
