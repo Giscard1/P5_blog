@@ -48,7 +48,7 @@ Installation
 Etape 1 : Cloner le Repositary sur votre serveur.
 Etape 2 : Créer une base de données sur votre SGBD.
 Etape 3 : Nommez la base de données P5.
-Etape 4 : Entrez vos informations de connexion à la base de données dans le fichier Config/db_config.php
+Etape 4 : Entrez vos informations de connexion à la base de données dans le fichier src/Repository/AbstractRepository.
 Etape 5 : Remplir le fichier App/Config/mail_config.php avec les accès à votre compte email.
 Etape 6 : Installer les dependances 
            Twig -> composer require "twig/twig:^2.0"
